@@ -3,30 +3,44 @@ const bcrypt = require("bcrypt");
 const sequelize = require("../config/config");
 
 class User extends Model {
-    // set up a method to run on instance data (per user) to check passwords
+    // Method to check password during login process
+    checkPassword(loginPw) {
+        return bcrypt.compareSync(loginPw, this.password);
+      }
 };
 
 User.init(
     { 
-        // Finish the user model
+        // User model with a user_id, username, and a password of atleast length 8
         id: {
-            type: DataType.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
             autoIncrement: true
         },
         username: {
-
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         password: {
-
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+              len: [8],
+            },
         },
     },
     {
     hooks: {
-        // set up beforeCreate lifecycle "hook"
-        // beforeCreate: async () => {},
-        // beforeUpdate: async () => {}
+        // Encrypts password on creation and when updating for greater security
+        beforeCreate: async (newUserData) => {
+            newUserData.password = await bcrypt.hash(newUserData.password, 10);
+            return newUserData;
+        },
+        beforeUpdate: async (updatedUserData) => {
+            updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+            return updatedUserData;
+        },
     },
     sequelize,
     timestamps: false,
