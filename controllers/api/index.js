@@ -1,6 +1,7 @@
-const { route } = require("../../../.Main/controllers/api");
+// const { route } = require("../../../.Main/controllers/api");
 
 const router = require("express").Router();
+const userRoutes = require('./userRoutes');
 
 // Finish the required pathing for these variables
 // const userRoutes = ;
