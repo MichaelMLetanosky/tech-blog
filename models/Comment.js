@@ -19,6 +19,7 @@ Comment.init(
             allowNull: false,
             defaultValue: DataTypes.NOW,
         },
+        // Attaches each comment to a single post
         post_id: {
             type: DataTypes.INTEGER,
             references: {
@@ -26,6 +27,7 @@ Comment.init(
                 key: 'id',
             },
         },
+        // Attaches each comment to a single user
         user_id: {
             type: DataTypes.INTEGER,
             references: {

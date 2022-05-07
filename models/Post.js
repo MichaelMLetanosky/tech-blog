@@ -22,6 +22,7 @@ Post.init({
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
+    // Attaches each post to a single user
     user_id: {
       type: DataTypes.INTEGER,
       references: {
