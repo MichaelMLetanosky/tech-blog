@@ -15,12 +15,7 @@ Post.init({
       allowNull: false,
     },
     contents: {
-      type: DataTypes.STRING,
-    },
-    date_created: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
+      type: DataTypes.TEXT,
     },
     // Attaches each post to a single user
     user_id: {
@@ -29,6 +24,11 @@ Post.init({
         model: 'user',
         key: 'id',
       },
+    },
+    date_created: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
     },
   },
   {
