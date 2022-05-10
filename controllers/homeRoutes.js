@@ -5,12 +5,12 @@ const withAuth = require('../utils/auth');
 router.get("/", async (req, res) => {
     try {
       const dbPostData = await Post.findAll({
-        include: [
-          {
-            model: User,
-            attributes: ['username'],
-          },
-        ],
+        // include: [
+        //   {
+        //     model: User,
+        //     attributes: ['username'],
+        //   },
+        // ],
       });
   
       const posts = dbPostData.map((post) =>
@@ -30,7 +30,11 @@ router.get("/post/:id", async (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-    // login
+  try {
+  res.render('login')
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 router.get("/signup", (req, res) => {
