@@ -14,14 +14,10 @@ Comment.init(
         contents: {
             type: DataTypes.STRING,
         },
-        date_created: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: DataTypes.NOW,
-        },
         // Attaches each comment to a single post
         post_id: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             references: {
                 model: 'post',
                 key: 'id',
@@ -30,6 +26,7 @@ Comment.init(
         // Attaches each comment to a single user
         user_id: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             references: {
                 model: 'user',
                 key: 'id',
@@ -38,7 +35,6 @@ Comment.init(
     },
     {
         sequelize,
-        timestamps: false,
         freezeTableName: true,
         underscored: true,
         modelName: 'comment',

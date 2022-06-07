@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3001;
 // Setting up session
 const sess = {
   secret: 'Super secret secret',
-  cookie: {},
+  cookie: {maxAge: 36000},
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
@@ -34,7 +34,7 @@ app.set("view engine", "handlebars");
 
 // Setting up express
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
